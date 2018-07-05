@@ -1,11 +1,13 @@
 package com.codepath.apps.restclienttemplate;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -13,12 +15,15 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
 public class TimelineActivity extends AppCompatActivity {
+    public static final int EDIT_REQUEST_CODE = 20;
+
     TwitterClient client;
     TweetAdapter tweetAdapter;
     ArrayList<Tweet> tweets;
@@ -42,13 +47,27 @@ public class TimelineActivity extends AppCompatActivity {
 
         populateTimeLine();
     }
-
+    public void onComposeAction(MenuItem mi){
+        Intent i = new Intent(TimelineActivity.this, ComposeActivity.class);
+        startActivityForResult(i, EDIT_REQUEST_CODE); // brings up the second activity
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK && requestCode == EDIT_REQUEST_CODE) {
+            Tweet tweet = Parcels.unwrap(data.getParcelableExtra("myDataKey"));
+            tweets.add(0, tweet);
+            tweetAdapter.notifyItemInserted(0);
+            rvTweets.scrollToPosition(0);
+        }
+    }
+
     private void populateTimeLine() {
 //        Toast.makeText(this, )
         client.getHomeTimeline(new JsonHttpResponseHandler() {
