@@ -50,7 +50,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://i.imgur.com/PwmgylJ.gif' />
+<img src='https://i.imgur.com/GThjoIS.gif' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
