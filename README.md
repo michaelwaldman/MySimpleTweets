@@ -43,7 +43,6 @@ The following **bonus** features are implemented:
 * [ ] User can **open the twitter app offline and see last loaded tweets**. Persisted in SQLite tweets are refreshed on every application launch. While "live data" is displayed when app can get it from Twitter API, it is also saved for use in offline mode.
 
 
-The following **additional** features are implemented:
 
 
 ## Video Walkthrough
@@ -56,8 +55,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
-
+It was difficult to learn how all the different activities we create may interact and affect other activities, furthermore, we used intents in various ways besides just switching to different activities, such as as a method of passing information between separate activities. Besides this, there was a lot of conditional checking based on status codes that I would not intuitively have figured out/known.
 ## Open-source libraries used
 
 - [Android Async HTTP](https://github.com/loopj/android-async-http) - Simple asynchronous HTTP requests with JSON parsing
